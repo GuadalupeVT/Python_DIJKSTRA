@@ -56,6 +56,35 @@ class Grafo:
             neighbours[edge.start].add((edge.end, edge.cost))
 
         return neighbours
+    
+    def dijkstra(self, source, dest):
+        assert source in self.vertices, 'Tal nodo de origen no existe'
+        distancias = {vertex: inf for vertex in self.vertices}
+        previous_vertices = {
+            vertex: None for vertex in self.vertices
+        }
+        distancias[source] = 0
+        vertices = self.vertices.copy()
+
+        while vertices:
+            current_vertex = min(
+                vertices, key=lambda vertex: distancias[vertex])
+            vertices.remove(current_vertex)
+            if distancias[current_vertex] == inf:
+                break
+            for neighbour, cost in self.neighbours[current_vertex]:
+                alternative_route = distancias[current_vertex] + cost
+                if alternative_route < distancias[neighbour]:
+                    distancias[neighbour] = alternative_route
+                    previous_vertices[neighbour] = current_vertex
+
+        path, current_vertex = deque(), dest
+        while previous_vertices[current_vertex] is not None:
+            path.appendleft(current_vertex)
+            current_vertex = previous_vertices[current_vertex]
+        if path:
+            path.appendleft(current_vertex)
+        return path
 
 '''
 Created on 16/11/2018
