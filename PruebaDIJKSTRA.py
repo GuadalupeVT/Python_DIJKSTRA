@@ -1,4 +1,10 @@
 #https://dev.to/mxl/dijkstras-algorithm-in-python-algorithms-for-beginners-dkc
+'''
+Created on 16/11/2018
+
+@author: GVT
+'''
+
 from collections import deque, namedtuple
 
 # infinito como la distancia default entre nodos
@@ -86,8 +92,24 @@ class Grafo:
             path.appendleft(current_vertex)
         return path
 
-'''
-Created on 16/11/2018
+print "Se creara un grafo de a-f"
+a1=int(raw_input("Distancia de a-b"))
+a2=int(raw_input("Distancia de a-c"))    
+a3=int(raw_input("Distancia de a-f"))  
+a4=int(raw_input("Distancia de b-c"))  
+a5=int(raw_input("Distancia de b-d"))  
+a6=int(raw_input("Distancia de c-d"))  
+a7=int(raw_input("Distancia de c-f"))
+a8=int(raw_input("Distancia de d-e"))    
+a9=int(raw_input("Distancia de e-f"))  
+    
+grafo = Grafo([("a", "b", (a1)),  ("a", "c", (a2)),  ("a", "f", (a3)), ("b", "c", (a4)),
+    ("b", "d", (a5)), ("c", "d", (a6)), ("c", "f", (a7)),  ("d", "e", (a8)),
+    ("e", "f", (a9))])
 
-@author: GVT
-'''
+print "-------------Camino mas corto---------------"
+origen=str(raw_input("Ingresa nodo origen"))
+destino=str(raw_input("Ingresa nodo destino"))
+print(grafo.dijkstra(origen, destino))
+
+
